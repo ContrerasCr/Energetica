@@ -450,7 +450,7 @@ def generar_txt(t, gamm, n1, n2, alpha, beta, pob_critica, rut1, rut2, rut3, pre
 
     # Datos del modelo
 
-    nombre_archivo = 'Datos Del modelo, horizonte ' + str(t) + ' dias' + '.txt'
+    nombre_archivo = 'Datos del modelo, horizonte ' + str(t) + ' dias' + '.txt'
     pob_1 = 'Personas en la localidad 1: ' + str(int(n1))
     pob_2 = 'Personas en la localidad 2: ' + str(int(n2))
     # rec_ruta1 = 'Recorrido de la ruta 1 [km]: ' + str(rut1) + '[km]'
