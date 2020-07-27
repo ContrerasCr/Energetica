@@ -21,8 +21,8 @@ def vueltas_totales(Cf, Cm, CVt, semana, pre_com, ruta1, ruta2, ruta3):
     arr_f = 37000  # Costo Arriendo Force
     arr_m = 42000  # Costo Arriendo Mercedez
     # pre_com   # Precio combustible
-    eff_f = 15  # Eficiencia de Ford
-    eff_m = 25  # Eficiencia de Mercedez
+    eff_f = 13.4  # Eficiencia de Ford
+    eff_m = 14.1  # Eficiencia de Mercedez
     d1 = ruta1  # Ruta 1 [km]
     d2 = ruta2  # Ruta 2 [km]
     d3 = ruta3  # Ruta 3 [km]
