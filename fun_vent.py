@@ -8,7 +8,6 @@ def activos_criticos(t, n, alpha, beta, pob_critica):
     casos_totales = list()
     dia = list()
     cont_act = 0
-    # inf_diarios = 0
 
     for i in range(t+1):
         inf_crit = Funciones.infectados_criticos(i, n, alpha, beta, pob_critica)
@@ -92,7 +91,10 @@ def costo_almacenamiento_ventilador(gamma, alpha, beta, t, n, pob_critica):
     costos_almacenamieto = 0
 
     for tm in range(t-1):
-        costos_almacenamieto += lis_vent_alm_x_dia[tm] * round((gamma * alpha * pow(2.71828, (-beta * tm) / 2790)), 4)
+        try:
+            costos_almacenamieto += lis_vent_alm_x_dia[tm] * round((gamma*alpha * pow(2.71828, (-beta * tm) / 2790)), 4)
+        except IndexError:
+            costos_almacenamieto += 0
 
     costos_almacenamieto = round(costos_almacenamieto, 0)
 

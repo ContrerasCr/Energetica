@@ -1,120 +1,104 @@
 import math
 
 
-def funcion_costos(Cf, Cm, CVt1, CVt2):
+def funcion_costos(Cf, Cm, CVt, ruta1, ruta2, ruta3, combust, semana):
 
-    Af = 37000  # Arriendo diario Force 3500
-    Am = 42000  # Arriendo diario Mercedez Benz
-    Pc = 550    # Precio diesel en pesos
-    Em = 25     # Km por litros de Mercedez Benz
-    Ef = 15     # KM por litro de Force 3500
-    d1 = 152.2  # Ruta 1 [km]
-    d2 = 348    # Ruta 2 [km]
-    d3 = 349    # Ruta 3 [km]
-    Tvhf = 8.6  # Capacidad de equipaje de Force 3500
-    Tvhm = 4.6  # Capacidad de equipaje de Mercedes Benz
-    Tvt  = 0.5469  # Tamaño del ventilador
-    CVt = CVt1 + CVt2  # Suma de las dos poblaciones
-    alpha = int(Tvhf/Tvt)  # Cantidad maximas de ventiladores que puede llevar Force 3500
-    betha = int(Tvhm/Tvt)  # Cantidad maximas de ventiladores que puede llevar Mercedez Benz
+    pc = combust    # Precio diesel en pesos
 
-    value = vueltas_totales(Cf, Cm, CVt1, CVt2)
-
-    if value == False:
-        return False
-
-    n, m, k = value
-
-    Nf = 0
-    Mf = 0
-    Kf = 0
-    Nm = 0
-    Mm = 0
-    Km = 0
-
-    rango_max = 8
-    if Cm == 0:
-        rango_max = 15
-
-    for nf in range(n+1):
-        for nm in range(n+1):
-            if (nf + nm == n) and (n != 0):
-                if ((nf*alpha*Cf)+(nm*betha*Cm)) in list(range(CVt1, CVt1 + rango_max)):
-                    Nf = nf
-                    Nm = nm
-
-    for mf in range(m+1):
-        for mm in range(n+1):
-            if (mf + mm == m) and (m != 0):
-                if ((mf*alpha*Cf)+(mm*betha*Cm)) in list(range(CVt2, CVt2 + rango_max)):
-                    Mf = mf
-                    Mm = mm
-
-    for kf in range(k+1):
-        for km in range(n+1):
-            if (kf + km == k) and (k != 0):
-                if ((kf*alpha*Cf)+(km*betha*Cm)) in list(range(CVt, CVt + rango_max)):
-                    Kf = kf
-                    Km = km
-
-    vueltas = (Nf, Nm, Mf, Mm, Kf, Km)
-
-
-    costo_arriendo = (Af*Cf + Am*Cm)
-    costo_combustible = int((Pc*((d1*Nm)+(d2*Mm)+(d3*Km)))/Em + (Pc*((d1*Nf)+(d2*Mf)+(d3*Kf)))/Ef)
-
-
-    ret = (costo_arriendo, costo_combustible, vueltas)
-
-    return ret
-
-
-
-
-
-def vueltas_totales(Cf, Cm, CVt1, CVt2):
-
-    Tvhf = 8.6
-    Tvhm = 4.6
-    Tvt  = 0.5469
-    CVt = CVt1 + CVt2
-
-    alpha = int(Tvhf/Tvt)
-    betha = int(Tvhm/Tvt)
-
-    maximo = math.ceil((CVt1/betha)) + math.ceil((CVt2/betha))
-    Cf_max = math.ceil((CVt/betha))
-    Cm_max = math.ceil((CVt / betha))
-    n_max = math.ceil((CVt1 / betha))
-    m_max = math.ceil((CVt2 / betha))
-    k_max = math.ceil((CVt / betha))
-    try:
-        n = math.ceil(CVt1/((alpha*Cf)+(betha*Cm)))
-    except ZeroDivisionError:
-        n = 0
-
-    try:
-        m = math.ceil(CVt2/((alpha*Cf)+(betha*Cm)))
-    except ZeroDivisionError:
-        m = 0
-
-    k = 0
-    try:
-        k = math.ceil((CVt/((alpha*Cf)+(betha*Cm))))
-    except ZeroDivisionError:
-        k = 0
-
-    rango_max = 15
-    if Cf == 0:
-        rango_max = 8
-
-    if (Cf+Cm>maximo)or(Cm>Cm_max)or(Cf > Cf_max)or(n > n_max)or(m > m_max)or(k > k_max)or(CVt<(Cf*15+Cm*8)-rango_max):
-
+    value = vueltas_totales(Cf, Cm, CVt, semana, pc, ruta1, ruta2, ruta3)
+    # value = (costo total, costo arriendo, costo combustible, vueltas, Cf, Cm, CVt, semana)
+    # Value es la mejor opcion de esa curva de nivel
+    #print(value)
+    if not value:
         return False
 
     else:
-        ret = (n, m, k)
+        return value
 
-        return ret
+
+def vueltas_totales(Cf, Cm, CVt, semana, pre_com, ruta1, ruta2, ruta3):
+
+    arr_f = 37000  # Costo Arriendo Force
+    arr_m = 42000  # Costo Arriendo Mercedez
+    # pre_com   # Precio combustible
+    eff_f = 15  # Eficiencia de Ford
+    eff_m = 25  # Eficiencia de Mercedez
+    d1 = ruta1  # Ruta 1 [km]
+    d2 = ruta2  # Ruta 2 [km]
+    d3 = ruta3  # Ruta 3 [km]
+
+    alpha = 15
+    betha = 8
+
+    maximo = math.ceil((CVt/betha)) + math.ceil((CVt/betha))*1.2
+    Cf_max = math.ceil((CVt/alpha))*1.2
+    Cm_max = math.ceil((CVt / betha))*1.2
+
+    try:
+        kkf = math.ceil((CVt/(alpha*Cf)))
+    except ZeroDivisionError:
+        kkf = 0
+
+    try:
+        kkm = math.ceil((CVt/(betha*Cm)))
+    except ZeroDivisionError:
+        kkm = 0
+
+    if (Cf+Cm > maximo) or (Cm > Cm_max) or (Cf > Cf_max) or (Cf == 0 and Cm == 0):
+        return False
+
+    else:
+        vector = [0, 0, 0, 0, kkf, kkm]
+
+    vl0 = list((range(vector[0]+1)))
+    vl1 = list((range(vector[1]+1)))
+    vl2 = list((range(vector[2]+1)))
+    vl3 = list((range(vector[3]+1)))
+
+    vl4 = list((range(vector[4]+1)))
+    vl5 = list((range(vector[5]+1)))
+
+    # valores_vueltas_o1 = [(nf, nm, mf, mm) for nf in vl0 for nm in vl1 for mf in vl2 for mm in vl3]
+    valores_vueltas_o2 = [(kf, km) for kf in vl4 for km in vl5]
+
+    soluciones = list()
+
+    for i in valores_vueltas_o2:
+
+        e, f = i
+        updt = ((int(CVt / 15)) * 15) + 15
+        verificador = list(range(CVt, int(updt * 1.25)))
+
+        control = [a1 * 15 + a2 * 8 for a1 in range(int(math.ceil((CVt / 15) * 1.5)) + 1) for a2 in
+                   range(int(math.ceil((CVt / 8) * 1.5)) + 1) if (a1 * 15 + a2 * 8) in verificador]
+
+        control.sort()
+        cond2 = alpha * Cf * e + betha * Cm * f
+
+        if cond2 in control:
+
+            # print(a, b, c, d, e, f, '|', condicional, control, '|', Cf, Cm, '|', CVt, 'semana: ', semana)
+            # print(condicional, control, '|', str('**********************************'), semana)
+
+            val = [0, 0, 0, 0, e, f]
+            val = tuple(val)
+            costo_arriendo = (arr_f * Cf + arr_m * Cm)
+
+            costo_combustible = int((pre_com * (Cf * d3 * e) / eff_f) + (pre_com * (d3 * f * Cm) / eff_m))
+
+            costo_total = costo_arriendo + costo_combustible
+
+            tupack_bb = (costo_combustible, costo_arriendo, costo_total, val, Cf, Cm, CVt, semana)
+
+            soluciones.append(tupack_bb)
+
+    if len(soluciones) == 0:
+        return False
+    else:
+        best_pack = min(soluciones)
+        a1,a2,a3,a4,a5,a6,a7,a8 = best_pack
+        best_pack = (a3,a2,a1,a4,a5,a6,a7,a8)
+
+        return best_pack
 
 # End Document

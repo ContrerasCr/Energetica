@@ -1,7 +1,4 @@
 import Resume
-
-
-# Modelos de ventiladores [Modelo = (tamaño, gamma, dias de recuperacion)]
 infinity = (0.5469, 6, 28)
 
 
@@ -97,8 +94,38 @@ def activos_criticos_acumulados(t, n, alpha, betha, p, tp):
 
     return activos_dia_t
 
-def crear_txt(t, gamma, n1, n2, alpha, beta, pob_critica):
 
-    datos = Resume.retorno_final(t, gamma, n1, n2, alpha, beta, pob_critica)
+def poner_punto_de_miles(value):
 
-# End File
+    value = str(value)
+    lis = list(value)
+
+    lis.reverse()
+    grups = list()
+    for i in range(0, len(lis), 3):
+        try:
+            grups.append(str(lis[i])+str(lis[i+1])+str(lis[i+2]))
+        except IndexError:
+            try:
+                grups.append(str(lis[i]) + str(lis[i + 1]))
+            except IndexError:
+                grups.append(str(lis[i]))
+
+    grups = '.'.join(grups)
+    val = list(grups)
+    val.reverse()
+    ret = ''.join(val)
+    ret = '$' + ret
+
+    return ret
+
+
+def contaminacion_total(cc, pre_comb):
+
+    litros_totales = cc/pre_comb
+
+    co2_producido = int(litros_totales*2.68)
+
+    return co2_producido
+
+# End Document
