@@ -9,7 +9,7 @@ root = tk.Tk()
 root.title("Proyecto energetica 2020-1")
 style = ttk.Style()
 style.configure("BW.TLabel", justify='LEFT')
-root.geometry('730x430')
+#root.geometry('730x430')
 
 # --------------Start Code Here  'Matrices'------------------------------------------------------------
 
@@ -231,53 +231,16 @@ x0y8.grid(sticky="W", column=0, row=8)
 
 x0y9 = ttk.Label(root, text="   ----------------------------------", style="BW.TLabel")
 x0y9.grid(sticky="W", column=0, row=9)
-# x0y10 = ttk.Label(root, text="Ruta 1:", style="BW.TLabel")
-# x0y10.grid(sticky="W", column=0, row=10)
-# x0y11 = ttk.Label(root, text="Ruta 2:", style="BW.TLabel")
-# x0y11.grid(sticky="W", column=0, row=11)
-x0y12 = ttk.Label(root, text="Ruta[km]:", style="BW.TLabel")
-x0y12.grid(sticky="W", column=0, row=10)
-x0y13 = ttk.Label(root, text="Costo Combustible:", style="BW.TLabel")
-x0y13.grid(sticky="W", column=0, row=11)
-
-x0y14 = ttk.Label(root, text='Graficos')
-x0y14.grid(column=0, row=12)
-
-
-x0y15 = ttk.Button(root, text='Grafica de recuperados', state=tk.NORMAL,
-                   command=lambda: graf_recuperados(dia_evaluacion(), pob_total(),
-                                                    valor_alpha(), valor_beta(),
-                                                    poblc_critica(), tiempo_de_recuperacion_no_c()))
-x0y15.grid(column=0, row=13)
-
-x0y16 = ttk.Button(root, text='Grafica de recuperados criticos', state=tk.NORMAL,
-                   command=lambda: graf_recuperados_crit(dia_evaluacion(), pob_total(),
-                                                         valor_alpha(), valor_beta(),
-                                                         poblc_critica()))
-x0y16.grid(column=0, row=14)
-
-x0y17 = ttk.Button(root, text='Grafica de infectados', state=tk.NORMAL,
-                   command=lambda: graf_infectados(dia_evaluacion(), pob_total(),
-                                                   valor_alpha(), valor_beta(),
-                                                   poblc_critica()))
-x0y17.grid(column=0, row=15)
-
-x0y18 = ttk.Button(root, text='Grafica de infectados criticos', state=tk.NORMAL,
-                   command=lambda: graf_infectados_crit(dia_evaluacion(), pob_total(),
-                                                        valor_alpha(), valor_beta(),
-                                                        poblc_critica()))
-x0y18.grid(column=0, row=16)
-x0y19 = ttk.Button(root, text='Casos totales', state=tk.NORMAL,
-                   command=lambda: grafica_casos_totales(dia_evaluacion(), pob_total(),
-                                                         valor_alpha(), valor_beta(),
-                                                         poblc_critica()))
-x0y19.grid(column=0, row=17)
-x0y20 = ttk.Button(root, text='Casos activos', state=tk.NORMAL,
-                   command=lambda: grafica_activos_por_dia(dia_evaluacion(), pob_total(),
-                                                           valor_alpha(), valor_beta(),
-                                                           poblc_critica(), tiempo_de_recuperacion_no_c()))
-x0y20.grid(column=0, row=18)
-
+x0y10 = ttk.Label(root, text="Costo Combustible:", style="BW.TLabel")
+x0y10.grid(sticky="W", column=0, row=10)
+x0y11 = ttk.Label(root, text="Ruta 1 [km]:", style="BW.TLabel")
+x0y11.grid(sticky="W", column=0, row=11)
+x0y12 = ttk.Label(root, text="Ruta 2 [km]:", style="BW.TLabel")
+x0y12.grid(sticky="W", column=0, row=12)
+x0y13 = ttk.Label(root, text="Ruta 3 [km]:", style="BW.TLabel")
+x0y13.grid(sticky="W", column=0, row=13)
+x0y14 = ttk.Label(root, text='Ventilador')
+x0y14.grid(sticky="W", column=0, row=14)
 
 # --------------End Code Here-----------------------------------------------
 
@@ -303,22 +266,16 @@ x1y8 = ttk.Entry(root, textvariable=tamano_de_poblacion_2)
 x1y8.grid(column=1, row=8)
 x1y9 = ttk.Label(root, text="-----------------------------", style="BW.TLabel")
 x1y9.grid(column=1, row=9)
-# x1y10 = ttk.Entry(root, textvariable=ruta1)
-# x1y10.grid(column=1, row=10)
-# x1y11 = ttk.Entry(root, textvariable=ruta2)
-# x1y11.grid(column=1, row=11)
-x1y12 = ttk.Entry(root, textvariable=ruta3)
-x1y12.grid(column=1, row=10)
-x1y13 = ttk.Entry(root, textvariable=costo_combustible)
-x1y13.grid(column=1, row=11)
-x1y14 = ttk.Label(root, text='Ventiladores')
-x1y14.grid(column=1, row=12)
-x1y15 = ttk.Radiobutton(root, text="INFINITY W4R", variable=ventilador, value=1)
-x1y15.grid(sticky="W", column=1, row=13)
-# x1y16 = ttk.Radiobutton(root, text="Hamiltone", variable=ventilador, value=2)
-# x1y16.grid(sticky="W", column=1, row=16)
-# x1y17 = ttk.Radiobutton(root, text="GTX1060", variable=ventilador, value=3)
-# x1y17.grid(sticky="W", column=1, row=17)
+x1y10 = ttk.Entry(root, textvariable=costo_combustible)
+x1y10.grid(column=1, row=10)
+x1y11 = ttk.Entry(root, textvariable=ruta3)
+x1y11.grid(column=1, row=11)
+x1y12 = ttk.Entry(root, textvariable=ruta1)
+x1y12.grid(column=1, row=12)
+x1y13 = ttk.Entry(root, textvariable=ruta2)
+x1y13.grid(column=1, row=13)
+x1y14 = ttk.Radiobutton(root, text="INFINITY W4R", variable=ventilador, value=1)
+x1y14.grid(sticky="W", column=1, row=14)
 
 # --------------End Code Here-----------------------------------------------
 
@@ -340,8 +297,18 @@ x2y7 = ttk.Label(root, text="Total de ventiladores Necesarios:", style="BW.TLabe
 x2y7.grid(sticky="W", column=2, row=7)
 x2y8 = ttk.Label(root, text="Cantidad de [kg] de CO2 producido: ", style="BW.TLabel")
 x2y8.grid(sticky="W", column=2, row=8)
-x2y9 = ttk.Label(root, text="------------------------", style="BW.TLabel")
+x2y9 = ttk.Label(root, text="Costo del proyecto por habitante Comuna 1: ", style="BW.TLabel")
 x2y9.grid(sticky="W", column=2, row=9)
+x2y10 = ttk.Label(root, text="Costo del proyecto por habitante Comuna 2: ", style="BW.TLabel")
+x2y10.grid(sticky="W", column=2, row=10)
+x2y11 = ttk.Label(root, text="Casos activos acumulados sobre habitantes de la Comuna 1 [%]: ", style="BW.TLabel")
+x2y11.grid(sticky="W", column=2, row=11)
+x2y12 = ttk.Label(root, text="Casos activos acumulados sobre habitantes de la Comuna 2 [%]: ", style="BW.TLabel")
+x2y12.grid(sticky="W", column=2, row=12)
+x2y13 = ttk.Label(root, text="T de CO2 por habitantes de la Comuna 1: ", style="BW.TLabel")
+x2y13.grid(sticky="W", column=2, row=13)
+x2y14 = ttk.Label(root, text="T de CO2 por habitantes de la Comuna 2: ", style="BW.TLabel")
+x2y14.grid(sticky="W", column=2, row=14)
 
 # --------------End Code Here-----------------------------------------------
 
@@ -368,17 +335,63 @@ x3y7 = ttk.Label(root, text="                    ", style="BW.TLabel")
 x3y7.grid(sticky="W", column=3, row=7)
 x3y9 = ttk.Label(root, text='', style="BW.TLabel")
 x3y9.grid(sticky="W", column=3, row=9)
-x3y15 = ttk.Label(root, text='Generar archivo .txt con datos', style="BW.TLabel")
-x3y15.grid(sticky="W", column=3, row=15)
-x3y16 = ttk.Label(root, text='detallados del proyecto', style="BW.TLabel")
-x3y16.grid(sticky="W", column=3, row=16)
-x3y17 = ttk.Button(root, text='Generar archivo', state=tk.NORMAL,
+
+
+# --------------End Code Here-----------------------------------------------
+
+# --------------Start Code Here  'Column 4'-------------------------------------
+
+x4y0 = ttk.Label(root, text='Graficos')
+x4y0.grid(column=4, row=0)
+
+
+x4y1 = ttk.Button(root, text='Grafica de recuperados', state=tk.NORMAL,
+                  command=lambda: graf_recuperados(dia_evaluacion(), pob_total(),
+                                                   valor_alpha(), valor_beta(),
+                                                   poblc_critica(), tiempo_de_recuperacion_no_c()))
+x4y1.grid(sticky="W", column=4, row=1)
+
+x4y2 = ttk.Button(root, text='Grafica de recuperados criticos', state=tk.NORMAL,
+                  command=lambda: graf_recuperados_crit(dia_evaluacion(), pob_total(),
+                                                        valor_alpha(), valor_beta(),
+                                                        poblc_critica()))
+x4y2.grid(sticky="W", column=4, row=2)
+
+x4y3 = ttk.Button(root, text='Grafica de infectados', state=tk.NORMAL,
+                  command=lambda: graf_infectados(dia_evaluacion(), pob_total(),
+                                                  valor_alpha(), valor_beta(),
+                                                  poblc_critica()))
+x4y3.grid(sticky="W", column=4, row=3)
+
+x4y4 = ttk.Button(root, text='Grafica de infectados criticos', state=tk.NORMAL,
+                  command=lambda: graf_infectados_crit(dia_evaluacion(), pob_total(),
+                                                       valor_alpha(), valor_beta(),
+                                                       poblc_critica()))
+x4y4.grid(sticky="W", column=4, row=4)
+x4y5 = ttk.Button(root, text='Casos totales', state=tk.NORMAL,
+                  command=lambda: grafica_casos_totales(dia_evaluacion(), pob_total(),
+                                                        valor_alpha(), valor_beta(),
+                                                        poblc_critica()))
+x4y5.grid(sticky="W",column=4, row=5)
+x4y6 = ttk.Button(root, text='Casos activos', state=tk.NORMAL,
+                  command=lambda: grafica_activos_por_dia(dia_evaluacion(), pob_total(),
+                                                          valor_alpha(), valor_beta(),
+                                                          poblc_critica(), tiempo_de_recuperacion_no_c()))
+x4y6.grid(sticky="W", column=4, row=6)
+
+x4y15 = ttk.Label(root, text='Generar archivo .txt con datos', style="BW.TLabel")
+x4y15.grid(sticky="W", column=4, row=15)
+x4y16 = ttk.Label(root, text='detallados del proyecto', style="BW.TLabel")
+x4y16.grid(sticky="W", column=4, row=16)
+
+x4y17 = ttk.Button(root, text='Generar archivo', state=tk.NORMAL,
                    command=lambda: generar_txt(dia_evaluacion(), gamma(), poblacion1(), poblacion2(),
                                                valor_alpha(), valor_beta(), poblc_critica(), recorrido_ruta1(),
                                                recorrido_ruta2(), recorrido_ruta3(), valor_combustible()))
-x3y17.grid(column=3, row=17)
-x3y19 = ttk.Label(root, text='By Volk', style="BW.TLabel")
-x3y19.grid(sticky="E", column=3, row=18)
+x4y17.grid(column=4, row=17)
+x4y18 = ttk.Label(root, text='By Volk', style="BW.TLabel")
+x4y18.grid(sticky="E", column=4, row=18)
+
 
 # --------------End Code Here-----------------------------------------------
 
@@ -425,7 +438,7 @@ def show_data(t, gamm, n1, n2, alpha, beta, pob_critica, rut1, rut2, rut3, pre_c
     y7.grid(sticky="W", column=3, row=7)
     y8 = ttk.Label(root, text=co2_total, style="BW.TLabel")
     y8.grid(sticky="W", column=3, row=8)
-    y9 = ttk.Label(root, text="-------------------------", style="BW.TLabel")
+    y9 = ttk.Label(root, text=" ---", style="BW.TLabel")
     y9.grid(sticky="W", column=3, row=9)
 
     return None
