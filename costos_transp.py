@@ -30,9 +30,9 @@ def vueltas_totales(Cf, Cm, CVt, semana, pre_com, ruta1, ruta2, ruta3):
     alpha = 15
     betha = 8
 
-    maximo = math.ceil((CVt/betha)) + math.ceil((CVt/betha))*1.2
-    Cf_max = math.ceil((CVt/alpha))*1.2
-    Cm_max = math.ceil((CVt / betha))*1.2
+    maximo = math.ceil(math.ceil((CVt/betha)) + math.ceil((CVt/betha))*1.2)
+    Cf_max = math.ceil((CVt/alpha)*1.2)
+    Cm_max = math.ceil((CVt / betha)*1.2)
 
     try:
         kkf = math.ceil((CVt/(alpha*Cf)))
